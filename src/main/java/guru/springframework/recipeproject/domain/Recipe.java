@@ -1,13 +1,19 @@
 package guru.springframework.recipeproject.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -24,6 +30,8 @@ public class Recipe {
 	private int servings;
 	private String source;
 	private String url;
+	
+	@Lob
 	private String directions;
 	
 	@Lob
@@ -32,10 +40,45 @@ public class Recipe {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy="recipe")
 	private Notes notes;
 	
-	
 	@OneToMany(cascade = CascadeType.ALL)
-	private Set<Ingredient> ingrediant;
+	private Set<Ingredient> ingrediant = new HashSet<>();
 	
+	@Enumerated(value = EnumType.STRING)
+	private Difficulty difficulty;
+	
+	@ManyToMany
+	@JoinTable(name = "recipe_category",
+	joinColumns = @JoinColumn(name = "recipe_id"),
+	inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private Set<Category> categories = new HashSet<>();
+	
+	
+	
+	
+	public Set<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Set<Category> categories) {
+		this.categories = categories;
+	}
+
+	public Set<Ingredient> getIngrediant() {
+		return ingrediant;
+	}
+
+	public void setIngrediant(Set<Ingredient> ingrediant) {
+		this.ingrediant = ingrediant;
+	}
+
+	public Difficulty getDifficulty() {
+		return difficulty;
+	}
+
+	public void setDifficulty(Difficulty difficulty) {
+		this.difficulty = difficulty;
+	}
+
 	public Long getId() {
 		return id;
 	}
