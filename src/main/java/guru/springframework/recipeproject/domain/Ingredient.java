@@ -39,6 +39,13 @@ public class Ingredient {
 	}
 
 
+	public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
+		super();
+		this.description = description;
+		this.amount = amount;
+		this.uom = uom;
+	}
+
 	public UnitOfMeasure getUom() {
 		return uom;
 	}

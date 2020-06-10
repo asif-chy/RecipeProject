@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
-@Entity
+import lombok.Getter;
+
+@Entity 
 public class Notes {
 	
 	@Id

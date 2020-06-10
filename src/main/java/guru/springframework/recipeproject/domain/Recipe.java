@@ -37,10 +37,10 @@ public class Recipe {
 	@Lob
 	private Byte[] image;
 
-	@OneToOne(cascade = CascadeType.ALL, mappedBy="recipe")
+	@OneToOne(cascade = CascadeType.ALL)
 	private Notes notes;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
 	private Set<Ingredient> ingrediant = new HashSet<>();
 	
 	@Enumerated(value = EnumType.STRING)
@@ -62,7 +62,13 @@ public class Recipe {
 	public void setCategories(Set<Category> categories) {
 		this.categories = categories;
 	}
-
+	
+	public Recipe addIngrediant(Ingredient ingredient) {
+		ingredient.setRecipe(this);
+		this.ingrediant.add(ingredient);
+		return this;
+	}
+ 
 	public Set<Ingredient> getIngrediant() {
 		return ingrediant;
 	}
@@ -156,7 +162,13 @@ public class Recipe {
 	}
 
 	public void setNotes(Notes notes) {
-		this.notes = notes;
+		
+		if (notes != null) {
+            this.notes = notes;
+            notes.setRecipe(this);
+        }
 	}
+	
+	
 
 }

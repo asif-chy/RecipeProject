@@ -137,11 +137,10 @@ public class Bootstrap implements ApplicationListener<ContextRefreshedEvent> {
 		
 		desiOmelette.getIngrediant().add(new Ingredient("Musturd Oil",new BigDecimal(2),teaSpoon, desiOmelette ));
 		
-		desiOmelette.getIngrediant().add(new Ingredient("Green Pepper",new BigDecimal(2),cup, desiOmelette));
-		desiOmelette.getIngrediant().add(new Ingredient("Onion",new BigDecimal(1),cup, desiOmelette));
-		desiOmelette.getIngrediant().add(new Ingredient("Egg",new BigDecimal(1),cup,desiOmelette)); 
-		desiOmelette.getIngrediant().add(new Ingredient("Oil",new BigDecimal(2),tableSpoon, desiOmelette));
-		 
+		desiOmelette.addIngrediant(new Ingredient("Green Pepper",new BigDecimal(2),cup));
+		desiOmelette.addIngrediant(new Ingredient("Onion",new BigDecimal(1),cup));
+		desiOmelette.addIngrediant(new Ingredient("Egg",new BigDecimal(1),cup)); 
+		desiOmelette.addIngrediant(new Ingredient("Oil",new BigDecimal(2),tableSpoon));
 		
 		desiOmelette.getCategories().add(indian);
 		
