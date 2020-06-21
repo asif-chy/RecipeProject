@@ -3,6 +3,8 @@ package guru.springframework.recipeproject.command;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.Lob;
+
 import guru.springframework.recipeproject.domain.Difficulty;
 
 public class RecipeCommand {
@@ -20,6 +22,17 @@ public class RecipeCommand {
 	private Set<CategoryCommand> categories = new HashSet<>();
 	private NotesCommand notes;
 	
+	@Lob
+	private Byte[] image;
+	
+	public Byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(Byte[] image) {
+		this.image = image;
+	}
+
 	public NotesCommand getNotes() {
 		return notes;
 	}
