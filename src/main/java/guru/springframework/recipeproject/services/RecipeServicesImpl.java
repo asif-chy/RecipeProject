@@ -12,6 +12,7 @@ import guru.springframework.recipeproject.command.RecipeCommand;
 import guru.springframework.recipeproject.converters.RecipeCommandToRecipe;
 import guru.springframework.recipeproject.converters.RecipeToRecipeCommand;
 import guru.springframework.recipeproject.domain.Recipe;
+import guru.springframework.recipeproject.exceptions.NotFoundException;
 import guru.springframework.recipeproject.repositories.RecipeRepository;
 
 @Service
@@ -45,14 +46,15 @@ public class RecipeServicesImpl implements RecipeService {
 		System.out.println("Find By Id Method" + L);
 		
 		Optional<Recipe> recipeById = recipeRepository.findById(L);
+
+		if (!recipeById.isPresent()) {
+			throw new NotFoundException("Recipe By Id Not Found " + L.toString());
+		}
 		
 		Recipe recipe = recipeById.get();
 		
 		System.out.println("findById executed " + recipe.getId());
-
-		if (!recipeById.isPresent()) {
-			throw new RuntimeException("Recipe By Id Not Found");
-		}
+		
 		return recipeById.get();
 	}
 
